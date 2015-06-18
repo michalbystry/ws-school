@@ -10,10 +10,8 @@ import java.util.SortedSet;
 public interface StudentService {
 
     boolean addStudent (Student newStudent);
-//    boolean addStudent (String name, String surname);
-//    void deleteStudent (String name, String surname);
-    Student findStudent (String name, String surName);
+    Student findStudent (Student student);
     SortedSet<Student> showAllStudents();
-
-    boolean deleteStudent(String name, String surname);
+    boolean isStudentRegistered(Student student);
+    boolean deleteStudent(Student student);
 }

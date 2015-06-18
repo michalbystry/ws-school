@@ -27,4 +27,5 @@ public class SchoolDto {
     public String getStudentSurname() {
         return studentSurname;
     }
+
 }

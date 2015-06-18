@@ -1,6 +1,6 @@
 package school.repository;
 
-import org.apache.tomcat.jni.Local;
+import org.springframework.stereotype.Repository;
 import school.model.Student;
 
 import java.time.LocalDate;
@@ -9,16 +9,50 @@ import java.util.*;
 /**
  * Created by michal on 24.05.15.
  */
-public class AbsenceRepositories {
 
-    Student student;
-    LocalDate dateOfAbsence;
+@Repository
+public class AbsenceRepositories implements AbsenceService {
 
-    ArrayList<AbsenceRepositories> abbsenceList = new ArrayList<>();
+    private static Map<Student, SortedSet<LocalDate>> absenceRepository = new HashMap<Student, SortedSet<LocalDate>>();
 
+    public Map<Student, SortedSet<LocalDate>> getAbsenceRepository() {
+        return absenceRepository;
+    }
 
+    public SortedSet<LocalDate> addAbsenceDate(Student student, LocalDate date) {
+        SortedSet<LocalDate> absenceSet = absenceRepository.get(student);
 
+        if (absenceSet != null) {
+            absenceSet.add(date);
+            absenceRepository.put(student, absenceSet);
+            return absenceRepository.get(student);
+        } else {
+            SortedSet<LocalDate> newAbsenceSet = new TreeSet<LocalDate>();
+            absenceSet.add(date);
+            absenceRepository.put(student, absenceSet);
+            return absenceRepository.get(student);
+        }
+    }
 
+    @Override
+    public boolean removeAbsenceDate(Student student, LocalDate date) {
+        SortedSet<LocalDate> absenceSet = absenceRepository.get(student);
 
+        if (absenceRepository.containsKey(student) && absenceSet != null) {
+            return absenceSet.remove(date);
+        }
+        ;
+        return false;
+    }
 
+    @Override
+    public SortedSet<LocalDate> getAbsenceDates(Student student) {
+        return Collections.unmodifiableSortedSet(absenceRepository.get(student));
+    }
 }
+
+
+
+
+
+

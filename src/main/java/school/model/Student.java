@@ -1,7 +1,5 @@
 package school.model;
 
-import school.repository.StudentService;
-
 /**
  * Created by michal on 24.05.15.
  */
@@ -9,6 +7,13 @@ public class Student {
     String name;
     String surname;
 
+    public Student() {
+    }
+
+    public Student(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
     public String getName() {
         return name;
     }
@@ -30,12 +35,7 @@ public class Student {
         return this.getName() + " " + this.getSurname();
     }
 
-    public Student(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
-
-    public boolean eguals(Object o) {
+       public boolean eguals(Object o) {
         if (o instanceof Student && ((Student) o) != null) {
             if (
                     this.getName().equalsIgnoreCase(((Student) o).getName()) &&
@@ -46,5 +46,9 @@ public class Student {
             }
         }
         return false;
+    }
+
+    public int hashCode(){
+        return (name+surname).hashCode();
     }
 }

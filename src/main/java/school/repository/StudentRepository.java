@@ -25,27 +25,19 @@ public class StudentRepository implements StudentService {
     }
 
 
-    public Student findStudent(String name, String surname) {
-//        if (!studentRepository.isEmpty() && name != null && surname != null) {
-        if (name == null && surname == null) {
-            return null;
-        }
-        Student searchedStudent = new Student(name, surname);
-        if (!studentRepository.isEmpty() && studentRepository.contains(searchedStudent)) {
-//            Student searchedStudent = new Student(name, surname);
+    public Student findStudent(Student student) {
+
+        if (!studentRepository.isEmpty() && studentRepository.contains(student)) {
             Iterator<Student> it = studentRepository.iterator();
             while (it.hasNext()) {
-                Student student = it.next();
-                if (student.eguals(searchedStudent)) {
-                    return student;
+                Student studentIterator = it.next();
+                if (studentIterator.eguals(student)) {
+                    return studentIterator;
                 }
-                ;
             }
-        } else {
+        }
             return null;
         }
-        return null;
-    }
 
     @Override
     public boolean addStudent(Student newStudent) {
@@ -58,49 +50,21 @@ public class StudentRepository implements StudentService {
     }
 
     @Override
-    public boolean deleteStudent(String name, String surname) {
-        Student removedStudent = findStudent(name, surname);
-        if (removedStudent != null) {
-            studentRepository.remove(removedStudent);
+    public boolean deleteStudent(Student student) {
+        Student removedStudent = findStudent(student);
+        if (studentRepository.contains(student)) {
+            studentRepository.remove(student);
             return true;
         } else {
             return false;
         }
     }
+
+    public boolean isStudentRegistered(Student student){
+        return studentRepository.contains(student);
+    }
 }
 
 
-//    @Override
-//    public boolean addStudent(String name, String surname) {
-//        if (name != null && surname != null) {
-////            try{
-//            studentRepository.add(new Student(name, surname));
-//            return true;
-////            }
-////            catch (Exception e){
-////                System.out.println("");;
-////            }
-//        }
-//        else {
-//            return false;
-//        }
-//    }
-
-//    @Override
-//    public void deleteStudent(String name, String surname) {
-//    }
-//}
-////        @Override
-////        public void addStudent (Student student){
-////            studentRepository.add(student);
-////
-////
-////        }
-//
-//    @Override
-//    public void deleteStudent(String name, String surname) {
-//        if (studentRepository.contains(student)) {
-//            studentRepository.remove(student);
-//        }
 
 

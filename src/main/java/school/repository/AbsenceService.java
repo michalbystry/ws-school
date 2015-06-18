@@ -1,18 +1,20 @@
 package school.repository;
 
 import school.model.Student;
-
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.SortedSet;
 
 /**
  * Created by michal on 25.05.15.
  */
 public interface AbsenceService {
-    //adding abbsence days to repository
-    void addAbsence (AbsenceService absenceRepository);
 
-    ArrayList findAbsenceDates(Student studentName);
+    public SortedSet<LocalDate> addAbsenceDate(Student student, LocalDate date);
 
+    public boolean removeAbsenceDate(Student student, LocalDate date);
 
-    //finding st
+    public SortedSet<LocalDate> getAbsenceDates(Student student);
+
+    public Map<Student, SortedSet<LocalDate>> getAbsenceRepository();
 }
