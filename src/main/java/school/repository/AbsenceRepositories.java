@@ -24,10 +24,10 @@ public class AbsenceRepositories implements AbsenceService {
 
         if (absenceSet != null) {
             absenceSet.add(date);
-            absenceRepository.put(student, absenceSet);
+//            absenceRepository.put(student, absenceSet);
             return absenceRepository.get(student);
         } else {
-            SortedSet<LocalDate> newAbsenceSet = new TreeSet<LocalDate>();
+            absenceSet = new TreeSet<LocalDate>();
             absenceSet.add(date);
             absenceRepository.put(student, absenceSet);
             return absenceRepository.get(student);
@@ -40,15 +40,20 @@ public class AbsenceRepositories implements AbsenceService {
 
         if (absenceRepository.containsKey(student) && absenceSet != null) {
             return absenceSet.remove(date);
-        }
-        ;
+        };
         return false;
     }
 
     @Override
     public SortedSet<LocalDate> getAbsenceDates(Student student) {
-        return Collections.unmodifiableSortedSet(absenceRepository.get(student));
+//        return Collections.unmodifiableSortedSet(absenceRepository.get(student));
+        return getAbsenceRepository().get(student);
+
+        //        return Collections.unmodifiableSortedSet(absenceRepository.get(student));
+        //        return (absenceRepository.get(student).!=null)? "null" :"not null";    }
+
     }
+
 }
 
 

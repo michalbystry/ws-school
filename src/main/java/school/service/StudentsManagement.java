@@ -59,23 +59,28 @@ public class StudentsManagement implements SchoolManagementService {
     @Override
     public SortedSet<LocalDate> addAbsenceDate(Student student, SchoolDateDto dateDto) {
 
-        LocalDate absenceDay = LocalDate.of(dateDto.getYear(),dateDto.getMonth(), dateDto.getDay());
+//        DateFormat f =  DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+//        String d = f.format()
+
+        LocalDate absenceDay = LocalDate.of(dateDto.getYear(), dateDto.getMonth(), dateDto.getDay());
 
         return absenceRepo.addAbsenceDate(student, absenceDay);
-    }
 
-    @Override
-    public boolean removeAbsenceDate(Student student, SchoolDateDto dateDto) {
 
-        LocalDate absenceDay = LocalDate.of(dateDto.getYear(),dateDto.getMonth(), dateDto.getDay());
-
-        return absenceRepo.removeAbsenceDate(student, absenceDay);
     }
 
     @Override
     public SortedSet<LocalDate> getAbsenceDates(Student student) {
 
         return absenceRepo.getAbsenceDates(student);
+    }
+
+    @Override
+        public boolean removeAbsenceDate(Student student, SchoolDateDto dateDto) {
+
+        LocalDate absenceDay = LocalDate.of(dateDto.getYear(),dateDto.getMonth(), dateDto.getDay());
+
+        return absenceRepo.removeAbsenceDate(student, absenceDay);
     }
 }
 

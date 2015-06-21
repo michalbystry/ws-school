@@ -14,7 +14,10 @@ public interface AbsenceService {
 
     public boolean removeAbsenceDate(Student student, LocalDate date);
 
+//    public SortedSet<LocalDate> getAbsenceDates(Student student);
+
     public SortedSet<LocalDate> getAbsenceDates(Student student);
 
     public Map<Student, SortedSet<LocalDate>> getAbsenceRepository();
+
 }

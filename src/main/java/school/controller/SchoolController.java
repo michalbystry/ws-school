@@ -44,11 +44,29 @@ public class SchoolController {
         return schoolManager.findStudent(name, surname);
     }
 
-    @RequestMapping(value ="/absence/{name}/{surname}/{date}", method = RequestMethod.PUT, consumes = "application/json")
+    @RequestMapping(value ="/absence/{name}/{surname}", method = RequestMethod.POST, consumes = "application/json")
     public SortedSet<LocalDate> addAbsence
             (@PathVariable("name") String name, @PathVariable("surname") String surname, @RequestBody @Valid SchoolDateDto absenceDate ){
-        return schoolManager.addAbsenceDate(new Student(name,surname), absenceDate);
+        return schoolManager.addAbsenceDate(new Student(name, surname), absenceDate);
     }
+
+    @RequestMapping(value ="/absence/{name}/{surname}", method = RequestMethod.GET, produces = "application/json")
+    public SortedSet<LocalDate> getAbsence
+            (@PathVariable("name") String name, @PathVariable("surname") String surname ){
+        return schoolManager.getAbsenceDates(new Student(name,surname));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

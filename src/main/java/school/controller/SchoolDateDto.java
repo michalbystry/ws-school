@@ -47,4 +47,7 @@ public class SchoolDateDto {
         this.month = month;
         this.year = year;
     }
+
+    public SchoolDateDto() {
+    }
 }

@@ -36,7 +36,7 @@ public class Student {
     }
 
        public boolean eguals(Object o) {
-        if (o instanceof Student && ((Student) o) != null) {
+        if ((o != null) || ((o.getClass() != this.getClass()))) {
             if (
                     this.getName().equalsIgnoreCase(((Student) o).getName()) &&
                             this.getSurname().equalsIgnoreCase(((Student) o).getSurname())) {
@@ -49,6 +49,6 @@ public class Student {
     }
 
     public int hashCode(){
-        return (name+surname).hashCode();
+        return (surname).hashCode();
     }
 }

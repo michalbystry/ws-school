@@ -58,8 +58,22 @@ public class AbsenceRepositoriesTest {
 //        assertTrue("student2 date should have not been deleted", absenceRepo.getAbsenceDates(student2).contains(LocalDate.of(2015, 1, 12)));
 //    }
 //
-//    @Test
-//    public void testGetAbsenceDates() throws Exception {
-//
-//    }
+    @Test
+    public void testGetAbsenceDates() throws Exception {
+        Student student = new Student("Kamil", "Kowalski");
+        AbsenceRepositories absence = new AbsenceRepositories();
+
+        absence.getAbsenceRepository().put(student,null);
+
+        assertTrue("treeSet should be null", absence.getAbsenceRepository().get(student) == null);
+
+        absence.addAbsenceDate(student, LocalDate.of(2015, 5, 10));
+        assertFalse("treeSet should not be null", absence.getAbsenceRepository().get(student) == null);
+
+        assertTrue("should be equal", student.eguals(new Student("Kamil","Kowalski")));
+
+        assertTrue("key should be included", absence.getAbsenceRepository().containsKey(new Student("Kamil", "Kowalski")));
+
+        assertTrue("result should not be null", absence.getAbsenceDates(new Student("Kamil", "Kowalski"))!=null);
+    }
 }
